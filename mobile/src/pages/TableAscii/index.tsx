@@ -1,25 +1,19 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  FlatList,
-  Text,
-  TouchableOpacity,
-  SafeAreaView,
-} from "react-native";
+import { View, Text, SafeAreaView, ScrollView } from "react-native";
+import { Table, Row, Rows } from "react-native-table-component";
 
 import Header from "../Header";
 import Footer from "../Footer";
 
 import styles from "./styles";
 
-interface Tabela {
-  id: number;
-  name: string;
-}
-[];
-
 const TableAscii = () => {
-  const [tables, setTables] = useState<Tabela[]>([]);
+  const [tableHeader, setTableHeader] = useState<
+    [String, String, String, String, String]
+  >();
+  const [tableData, setTableData] = useState<
+    [Number, String, String, String, String][]
+  >([]);
 
   async function loadEvents() {
     // if (loading) return;
@@ -35,12 +29,25 @@ const TableAscii = () => {
     // setTotal(response.data.data.total);
     // setPage(response.data.data.page);
     // setLoading(false);
-    setTables([
-      { id: 1, name: "Asc II" },
-      { id: 2, name: "Cores HTML" },
-      { id: 3, name: "Conversão de Pixels" },
-      { id: 4, name: "Códigos de estado HTML" },
-    ]);
+    function dec2bin(dec: number) {
+      return dec >= 0 ? dec.toString(2) : (~dec).toString(2);
+    }
+
+    function dec2hexString(dec: number) {
+      return "0x" + (dec + 0x100).toString(16).substr(-4).toUpperCase();
+    }
+    const linhas: [Number, String, String, String, String][] = [];
+    for (let i = 0; i < 256; i++) {
+      linhas[i] = [
+        i,
+        dec2hexString(i),
+        String.fromCharCode(i),
+        dec2bin(i),
+        encodeURI(String.fromCharCode(i)),
+      ];
+    }
+    setTableHeader(["Decimal", "Hexa", "Char", "Binário", "UriEncode"]);
+    setTableData(linhas);
   }
 
   useEffect(() => {
@@ -50,26 +57,20 @@ const TableAscii = () => {
   return (
     <View style={styles.container}>
       <Header drawerLabel="level2" />
-      <SafeAreaView style={styles.safeAreaView}>
+      <View>
         <Text style={styles.subtitle}>Tabelas Ascii</Text>
-
-        <FlatList
-          data={tables}
-          style={styles.tablList}
-          keyExtractor={(table) => String(table.id)}
-          showsVerticalScrollIndicator={false}
-          onEndReached={loadEvents}
-          onEndReachedThreshold={0.1}
-          renderItem={({ item: table }) => (
-            <TouchableOpacity
-              style={styles.detailsButtom}
-              key={table.id}
-              // onPress={() => navigateToDetails(event)}
-            >
-              <Text style={styles.detailsButtomText}>{table.name}</Text>
-            </TouchableOpacity>
-          )}
-        />
+      </View>
+      <SafeAreaView>
+        <ScrollView style={styles.tablList}>
+          <Table borderStyle={{ borderWidth: 2, borderColor: "#c8e1ff" }}>
+            <Row
+              data={tableHeader}
+              style={styles.head}
+              textStyle={styles.text}
+            />
+            <Rows data={tableData} textStyle={styles.text} />
+          </Table>
+        </ScrollView>
       </SafeAreaView>
       <Footer />
     </View>

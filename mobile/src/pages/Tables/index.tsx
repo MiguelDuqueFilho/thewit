@@ -5,7 +5,6 @@ import {
   Text,
   TouchableOpacity,
   SafeAreaView,
-  ScrollView,
 } from "react-native";
 
 import { useNavigation, useRoute } from "@react-navigation/native";

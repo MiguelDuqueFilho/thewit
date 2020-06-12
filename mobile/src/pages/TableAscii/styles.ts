@@ -54,4 +54,6 @@ export default StyleSheet.create({
     fontSize: 24,
     color: "#544F4C",
   },
+  head: { height: 40, backgroundColor: "#f1f8ff" },
+  text: { margin: 6, color: "#333" },
 });
