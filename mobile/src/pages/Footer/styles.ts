@@ -34,7 +34,7 @@ export default StyleSheet.create({
     fontSize: 36,
     fontWeight: "bold",
     textShadowColor: "#000",
-    textShadowOffset: { width: 3, height: 3 },
+    textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 10,
   },
   icon: {
@@ -42,7 +42,7 @@ export default StyleSheet.create({
     fontSize: 36,
     paddingRight: 20,
     textShadowColor: "#000",
-    textShadowOffset: { width: 3, height: 3 },
+    textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 10,
   },
   footer: {
@@ -57,7 +57,7 @@ export default StyleSheet.create({
     fontSize: 36,
     paddingLeft: 20,
     textShadowColor: "#000",
-    textShadowOffset: { width: 3, height: 3 },
+    textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 10,
   },
   textFooter: {
@@ -66,7 +66,7 @@ export default StyleSheet.create({
     fontSize: 18,
     fontFamily: "Roboto_400Regular",
     textShadowColor: "#000",
-    textShadowOffset: { width: 3, height: 3 },
+    textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 10,
   },
 });

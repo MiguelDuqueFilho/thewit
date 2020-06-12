@@ -18,7 +18,7 @@ export default StyleSheet.create({
     width: window.width,
     fontSize: 36,
     textShadowColor: "#333",
-    textShadowOffset: { width: -1, height: -1 },
+    textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 10,
     paddingVertical: 15,
   },
